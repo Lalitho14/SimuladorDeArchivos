@@ -3,6 +3,7 @@ package Controladores;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import Implementacion.*;
@@ -49,6 +50,8 @@ public class ControlMenu {
   private AnchorPane leer_asignacionContigua;
   @FXML
   private AnchorPane disco_pane;
+  @FXML
+  private ScrollPane leer_asignacionVinculada;
 
   @FXML
   void crearDisk(ActionEvent event) {
@@ -83,7 +86,6 @@ public class ControlMenu {
         color_archivo.setDisable(true);
         bloque_inicial.setDisable(false);
         asignarC.setDisable(false);
-        JOptionPane.showMessageDialog(null, "Se agrego correctamente " + a.getNombre() + ".", "Archivo - " + a.getNombre(), JOptionPane.INFORMATION_MESSAGE);// Mensaje con Error
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Datos no validos. Utilice numeros.", "Error al crear disco.", JOptionPane.ERROR_MESSAGE);// Mensaje con Error
       }
@@ -153,6 +155,12 @@ public class ControlMenu {
   @FXML
   void eliminarDisco(ActionEvent event) {
     disk = null;
+    nombre_archivo.setDisable(false);
+    nombre_archivo.setText("");
+    nombre_archivo.setPromptText("Ingrese Nombre de Archivo");
+    tam_archivo.setDisable(false);
+    tam_archivo.setText("");
+    tam_archivo.setPromptText("Ingrese tamaño (kb)");
     tam_disk.setText("");
     tam_disk.setPromptText("Tamaño Disco (kb)");
     tam_bloque_disk.setText("");
@@ -161,11 +169,65 @@ public class ControlMenu {
     disco_pane.setDisable(false);
     leer_asignacionContigua.setVisible(false);
     leer_asignacionContigua.setDisable(true);
+    leer_asignacionVinculada.setVisible(false);
+    leer_asignacionVinculada.setDisable(true);
     asignacion_indexada.setDisable(false);
     asignacion_indexada.setVisible(true);
     asignacion_vinculada.setDisable(false);
     asignacion_vinculada.setVisible(true);
     asignacion_contigua.setDisable(false);
     asignacion_contigua.setVisible(true);
+  }
+
+  @FXML
+  void AsignacionVinculadaGUI(ActionEvent event) {
+    double espacio = 2.0;
+    AnchorPane panel = new AnchorPane();
+    panel.setMinWidth(leer_asignacionVinculada.getPrefWidth());
+    panel.setMinHeight(leer_asignacionVinculada.getPrefHeight());
+    if (!disk.getDir().getArchivos().isEmpty()) {
+      for (int i = 0; i < Math.ceil((double) a.getTamanio() / disk.getTamanio_bloque()); i++) {
+        TextField tf = new TextField();
+        tf.setPrefWidth(100.0);
+        tf.setLayoutX(2.0);
+        if (i % 2 != 0) {
+          tf.setEditable(false);
+          tf.setLayoutX(122.0);
+        } else if (i != 0) {
+          espacio += 29.0;
+        }
+        tf.setLayoutY(espacio);
+        tf.setId("tf" + i);
+        panel.getChildren().add(tf);
+      }
+      Button btn = new Button();
+      espacio+=29;
+      btn.setLayoutY(espacio);
+      btn.setLayoutX(2.0);
+      btn.setPrefWidth(222.0);
+      panel.getChildren().add(btn);
+
+      leer_asignacionVinculada.setContent(panel);
+      TextField tf = (TextField) panel.lookup("#tf0");
+      tf.textProperty().addListener((e)->{
+        TextField tf2 = (TextField)panel.lookup("#tf1");
+        tf2.setText(tf.getText());
+      });
+
+      btn.setOnAction(e->{
+        System.out.println("Hola mundo ");
+      });
+
+      asignacion_indexada.setDisable(true);
+      asignacion_indexada.setVisible(false);
+      asignacion_vinculada.setDisable(true);
+      asignacion_vinculada.setVisible(false);
+      asignacion_contigua.setDisable(true);
+      asignacion_contigua.setVisible(false);
+      leer_asignacionVinculada.setVisible(true);
+      leer_asignacionVinculada.setDisable(false);
+    } else {
+      JOptionPane.showMessageDialog(null, "Agregue Archivos para iniciar simulación.", "No hay archivos.", JOptionPane.ERROR_MESSAGE);// Mensaje con Error
+    }
   }
 }

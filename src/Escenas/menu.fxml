@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,6 +50,7 @@
                         </AnchorPane>
                       <AnchorPane fx:id="metodos_menu" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="620.0">
                            <children>
+                              <ScrollPane fx:id="leer_asignacionVinculada" layoutY="30.0" prefHeight="117.0" prefWidth="341.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0" />
                               <AnchorPane fx:id="leer_asignacionContigua" disable="true" layoutX="322.0" layoutY="-6.0" prefHeight="200.0" prefWidth="340.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0">
                                  <children>
                                     <Text layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese bloque inicial : " wrappingWidth="341.0" />
@@ -62,8 +64,8 @@
                               <TextField fx:id="tam_archivo" layoutX="14.0" layoutY="78.0" prefHeight="25.0" prefWidth="192.0" promptText="Ingrese tamaño (kb)" AnchorPane.leftAnchor="14.0" />
                               <Text layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" wrappingWidth="53.0" />
                               <ColorPicker fx:id="color_archivo" layoutX="67.0" layoutY="113.0" />
+                              <Button fx:id="asignacion_vinculada" layoutX="307.0" layoutY="65.0" mnemonicParsing="false" onAction="#AsignacionVinculadaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignacion Vinculada (Listas Enlazadas)" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="asignacion_contigua" layoutX="307.0" layoutY="31.0" mnemonicParsing="false" onAction="#AsignacionContiguaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignación Contigua" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
-                              <Button fx:id="asignacion_vinculada" layoutX="307.0" layoutY="65.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="327.0" text="Asignacion Vinculada (Listas Enlazadas)" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="asignacion_indexada" layoutX="307.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="327.0" text="Asignacion Indexada" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Text layoutX="273.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija método de asignación" wrappingWidth="327.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="crear_archivo" layoutX="66.0" layoutY="149.0" mnemonicParsing="false" onAction="#CrearArchivo" text="Crear Archivo" />

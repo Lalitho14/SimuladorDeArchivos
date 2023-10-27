@@ -1,5 +1,6 @@
 package Implementacion;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -91,9 +92,11 @@ public class Disco {
         n_bloques.set(j, b);
         a.setBloques_asignados(j);
       }
+      JOptionPane.showMessageDialog(null, "Se agrego correctamente " + a.getNombre() + ".", "Archivo - " + a.getNombre(), JOptionPane.INFORMATION_MESSAGE);// Mensaje con Error
     } else {
       dir.borrarArchivo(a);
       System.out.println("No hay espacio suficiente...\n");
+      JOptionPane.showMessageDialog(null, "No hay espacio suficiente para " + a.getNombre() + ".", "Archivo - " + a.getNombre(), JOptionPane.ERROR_MESSAGE);// Mensaje con Error
     }
   }
 
