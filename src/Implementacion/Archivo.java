@@ -1,3 +1,5 @@
+package Implementacion;
+
 import java.util.ArrayList;
 
 public class Archivo {
@@ -6,7 +8,7 @@ public class Archivo {
 	private int tamanio;
 	private ArrayList<Integer> bloques_asignados;
 	
-	Archivo() {
+	public Archivo() {
 		this.bloques_asignados = new ArrayList<Integer>();
 	}
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControlMenu">
+   <children>
+      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.3362369337979094" layoutX="320.0" layoutY="24.0" orientation="VERTICAL" prefHeight="576.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <SplitPane dividerPositions="0.22487437185929648" layoutX="276.0" layoutY="62.0" prefHeight="284.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane fx:id="disco_pane" maxHeight="188.0" maxWidth="176.0" minHeight="188.0" minWidth="176.0" prefHeight="188.0" prefWidth="176.0" SplitPane.resizableWithParent="false">
+                           <children>
+                              <TextField fx:id="tam_disk" layoutX="14.0" layoutY="52.0" promptText="Tamaño Disco (kb)" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <TextField fx:id="tam_bloque_disk" layoutX="14.0" layoutY="109.0" promptText="Tamaño Bloque (kb)" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <Text layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISCO" textAlignment="CENTER" wrappingWidth="176.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Text layoutX="9.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamaño del Disco : " wrappingWidth="159.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="9.0" />
+                              <Text layoutX="9.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamaño del Bloque en disco : " wrappingWidth="159.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" />
+                              <Button fx:id="crear_disk" layoutX="66.0" layoutY="149.0" mnemonicParsing="false" onAction="#crearDisk" text="Crear" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane fx:id="metodos_menu" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="620.0">
+                           <children>
+                              <AnchorPane fx:id="leer_asignacionContigua" disable="true" layoutX="322.0" layoutY="-6.0" prefHeight="200.0" prefWidth="340.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <Text layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese bloque inicial : " wrappingWidth="341.0" />
+                                    <TextField fx:id="bloque_inicial" layoutY="71.0" prefHeight="25.0" prefWidth="341.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                                    <Button fx:id="asignarC" layoutX="120.0" layoutY="106.0" mnemonicParsing="false" onAction="#asignarC" text="Asignar" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                                 </children>
+                              </AnchorPane>
+                              <TextField fx:id="nombre_archivo" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="192.0" promptText="Ingrese Nombre de Archivo" AnchorPane.leftAnchor="14.0" />
+                              <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre del Archivo" />
+                              <Text layoutX="14.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamaño (kb)" wrappingWidth="106.599609375" />
+                              <TextField fx:id="tam_archivo" layoutX="14.0" layoutY="78.0" prefHeight="25.0" prefWidth="192.0" promptText="Ingrese tamaño (kb)" AnchorPane.leftAnchor="14.0" />
+                              <Text layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" wrappingWidth="53.0" />
+                              <ColorPicker fx:id="color_archivo" layoutX="67.0" layoutY="113.0" />
+                              <Button fx:id="asignacion_contigua" layoutX="307.0" layoutY="31.0" mnemonicParsing="false" onAction="#AsignacionContiguaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignación Contigua" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="asignacion_vinculada" layoutX="307.0" layoutY="65.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="327.0" text="Asignacion Vinculada (Listas Enlazadas)" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="asignacion_indexada" layoutX="307.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="327.0" text="Asignacion Indexada" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
+                              <Text layoutX="273.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija método de asignación" wrappingWidth="327.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="crear_archivo" layoutX="66.0" layoutY="149.0" mnemonicParsing="false" onAction="#CrearArchivo" text="Crear Archivo" />
+                              <Button fx:id="borrar_disk" layoutX="273.0" layoutY="149.0" mnemonicParsing="false" onAction="#eliminarDisco" text="Borrar Disco" />
+                              <TextField fx:id="nom_archivo_borrar" layoutX="362.0" layoutY="149.0" promptText="Nombre Archivo" />
+                              <Button fx:id="borrar_archivo" layoutX="508.0" layoutY="149.0" mnemonicParsing="false" onAction="#BorrarArchivo" text="Borrar Archivo" />
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="798.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,3 +1,5 @@
+package Implementacion;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +25,7 @@ public class Simulador {
 //    System.out.print("Ingrese el bloque inicial : ");
 //    int dato = Integer.parseInt(leer.readLine());
 //    while (disk.getN_bloques().get(dato).isEstado()){
-//      System.out.print("Bloque inicial ocupado, ingrese un bloque inicial valido : ");
+//      System.out.print("Implementacion.Bloque inicial ocupado, ingrese un bloque inicial valido : ");
 //      dato = Integer.parseInt(leer.readLine());
 //    }
 

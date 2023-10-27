@@ -1,8 +1,8 @@
+package Implementacion;
+
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class Disco {
   private int tamanio;
@@ -10,12 +10,12 @@ public class Disco {
   private ArrayList<Bloque> n_bloques;
   private Directorio dir;
 
-  Disco() {
+  public Disco() {
     this.n_bloques = new ArrayList<Bloque>();
     this.dir = new Directorio();
   }
 
-  Disco(int tamanio, int tamanio_bloque) {
+  public Disco(int tamanio, int tamanio_bloque) {
     this.tamanio = tamanio;
     this.tamanio_bloque = tamanio_bloque;
     this.n_bloques = new ArrayList<Bloque>();
@@ -171,6 +171,16 @@ public class Disco {
       }
     }
     dir.borrarArchivo(a);
+  }
+
+  public Archivo buscarArchivo(String nombre){
+    for (int i = 0; i < dir.getArchivos().size() ; i++) {
+      if(dir.getArchivos().get(i).getNombre().equals(nombre)){
+        return dir.getArchivos().get(i);
+      }
+    }
+
+    return null;
   }
 
   public void verDisco() {
