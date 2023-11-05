@@ -1,5 +1,9 @@
 package Implementacion;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,10 +13,13 @@ public class Disco {
   private int tamanio;
   private int tamanio_bloque;
   private ArrayList<Bloque> n_bloques;
+
+  private ArrayList<i_nodos> lista_inodos;
   private Directorio dir;
 
   public Disco() {
     this.n_bloques = new ArrayList<Bloque>();
+    this.lista_inodos = new ArrayList<>();
     this.dir = new Directorio();
   }
 
@@ -20,6 +27,7 @@ public class Disco {
     this.tamanio = tamanio;
     this.tamanio_bloque = tamanio_bloque;
     this.n_bloques = new ArrayList<Bloque>();
+    this.lista_inodos = new ArrayList<>();
     this.dir = new Directorio();
   }
 
@@ -85,6 +93,8 @@ public class Disco {
     }
 
     if (i != -1) {
+      if (i != init)
+        JOptionPane.showMessageDialog(null, "Se coloco " + a.getNombre() + " en bloque " + i + " por falta de espacio.");
       a.setInicio(i);
       for (int j = i; j < i + Math.ceil((double) a.getTamanio() / tamanio_bloque); j++) {
         Bloque b = new Bloque(true, j);
@@ -128,6 +138,43 @@ public class Disco {
     }
   }
 
+  public void asginacionVinculada(Archivo a, ArrayList<Integer> datos) {
+    if (espacioBloques((int) Math.ceil((double) a.getTamanio() / tamanio_bloque))) {
+      for (int i = 0; i < Math.ceil((double) a.getTamanio() / tamanio_bloque); i++) {
+        try {
+          Bloque b = new Bloque(true, datos.get(i));
+          b.setArchivo(a);
+          n_bloques.set(datos.get(i), b);
+          a.setBloques_asignados(datos.get(i));
+        } catch (Exception e) {
+          System.err.println(e.getMessage());
+        }
+      }
+      a.setInicio(a.getBloques_asignados().get(0));
+
+      for (int j = 0; j < datos.size(); j++) {
+        if (j + 1 < datos.size()) {
+          i_nodos i_nodo = new i_nodos(datos.get(j), datos.get(j + 1));
+          a.setLista_inodos(datos.get(j), datos.get(j + 1));
+          lista_inodos.add(i_nodo);
+        }
+      }
+
+      verInodos();
+
+      JOptionPane.showMessageDialog(null, "Se agrego correctamente " + a.getNombre() + ".", "Archivo - " + a.getNombre(), JOptionPane.INFORMATION_MESSAGE);// Mensaje con Error
+    } else {
+      dir.borrarArchivo(a);
+      System.out.println("No hay suficiente espacio en disco.");
+    }
+  }
+
+  public void verInodos() {
+    for (i_nodos i : lista_inodos) {
+      System.out.println(i.getDato() + " " + i.getSig_dato());
+    }
+  }
+
   public boolean espacioBloques(int tamanioArchivo) {
     int c = 0;
     for (Bloque b : n_bloques) {
@@ -138,7 +185,7 @@ public class Disco {
     return c >= tamanioArchivo;
   }
 
-  public void asginacionIndexada(Archivo a){
+  public void asginacionIndexada(Archivo a) {
     int dato;
     BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
 
@@ -166,6 +213,37 @@ public class Disco {
     }
   }
 
+  public void asginacionIndexada(Archivo a, ArrayList<Integer> datos) {
+    if (espacioBloques((int) Math.ceil((double) a.getTamanio() / tamanio_bloque))) {
+      for (int i = 0; i < Math.ceil((double) a.getTamanio() / tamanio_bloque); i++) {
+        try {
+          Bloque b = new Bloque(true, datos.get(i));
+          b.setArchivo(a);
+          n_bloques.set(datos.get(i), b);
+          a.setBloques_asignados(datos.get(i));
+        } catch (Exception e) {
+          System.err.println(e.getMessage());
+        }
+      }
+      a.setInicio(a.getBloques_asignados().get(0));
+
+      for (int j = 1; j < datos.size(); j++) {
+        //if (j != a.getInicio()) {
+          i_nodos i_nodo = new i_nodos(a.getInicio(), datos.get(j));
+          a.setLista_inodos(a.getInicio(), datos.get(j));
+          lista_inodos.add(i_nodo);
+        //}
+      }
+
+      verInodos();
+
+      JOptionPane.showMessageDialog(null, "Se agrego correctamente " + a.getNombre() + ".", "Archivo - " + a.getNombre(), JOptionPane.INFORMATION_MESSAGE);// Mensaje con Error
+    } else {
+      dir.borrarArchivo(a);
+      System.out.println("No hay suficiente espacio en disco.");
+    }
+  }
+
   public void eliminarDeDisco(Archivo a) {
     for (Bloque n : n_bloques) {
       if (n.isEstado() && n.getArchivo().getNombre().equals(a.getNombre())) {
@@ -176,9 +254,9 @@ public class Disco {
     dir.borrarArchivo(a);
   }
 
-  public Archivo buscarArchivo(String nombre){
-    for (int i = 0; i < dir.getArchivos().size() ; i++) {
-      if(dir.getArchivos().get(i).getNombre().equals(nombre)){
+  public Archivo buscarArchivo(String nombre) {
+    for (int i = 0; i < dir.getArchivos().size(); i++) {
+      if (dir.getArchivos().get(i).getNombre().equals(nombre)) {
         return dir.getArchivos().get(i);
       }
     }
@@ -197,6 +275,10 @@ public class Disco {
       if ((i + 1) % 4 == 0)
         System.out.println();
     }
+  }
+
+  public ArrayList<i_nodos> getLista_inodos() {
+    return this.lista_inodos;
   }
 
 }

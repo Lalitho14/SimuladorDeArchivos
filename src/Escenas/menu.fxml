@@ -7,8 +7,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ControlMenu">
@@ -50,12 +53,13 @@
                         </AnchorPane>
                       <AnchorPane fx:id="metodos_menu" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="620.0">
                            <children>
-                              <ScrollPane fx:id="leer_asignacionVinculada" layoutY="30.0" prefHeight="117.0" prefWidth="341.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0" />
-                              <AnchorPane fx:id="leer_asignacionContigua" disable="true" layoutX="322.0" layoutY="-6.0" prefHeight="200.0" prefWidth="340.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0">
+                              <AnchorPane fx:id="leer_asignacion" disable="true" layoutX="322.0" layoutY="-6.0" prefHeight="200.0" prefWidth="340.0" visible="false" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="0.0">
                                  <children>
-                                    <Text layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese bloque inicial : " wrappingWidth="341.0" />
+                                    <Button fx:id="asignarV" layoutX="120.0" layoutY="106.0" mnemonicParsing="false" onAction="#asignarV" text="Asignar" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                                    <Text fx:id="letrero_lectura" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese bloque inicial : " wrappingWidth="341.0" />
                                     <TextField fx:id="bloque_inicial" layoutY="71.0" prefHeight="25.0" prefWidth="341.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                                     <Button fx:id="asignarC" layoutX="120.0" layoutY="106.0" mnemonicParsing="false" onAction="#asignarC" text="Asignar" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                                    <Button fx:id="asignarI" layoutX="120.0" layoutY="106.0" mnemonicParsing="false" onAction="#asignarI" text="Asignar" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                                  </children>
                               </AnchorPane>
                               <TextField fx:id="nombre_archivo" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="192.0" promptText="Ingrese Nombre de Archivo" AnchorPane.leftAnchor="14.0" />
@@ -63,10 +67,13 @@
                               <Text layoutX="14.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tamaño (kb)" wrappingWidth="106.599609375" />
                               <TextField fx:id="tam_archivo" layoutX="14.0" layoutY="78.0" prefHeight="25.0" prefWidth="192.0" promptText="Ingrese tamaño (kb)" AnchorPane.leftAnchor="14.0" />
                               <Text layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" wrappingWidth="53.0" />
-                              <ColorPicker fx:id="color_archivo" layoutX="67.0" layoutY="113.0" />
+                              <ColorPicker fx:id="color_archivo" layoutX="67.0" layoutY="113.0">
+                                 <value>
+                                    <Color red="1.0" />
+                                 </value></ColorPicker>
                               <Button fx:id="asignacion_vinculada" layoutX="307.0" layoutY="65.0" mnemonicParsing="false" onAction="#AsignacionVinculadaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignacion Vinculada (Listas Enlazadas)" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="asignacion_contigua" layoutX="307.0" layoutY="31.0" mnemonicParsing="false" onAction="#AsignacionContiguaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignación Contigua" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
-                              <Button fx:id="asignacion_indexada" layoutX="307.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="327.0" text="Asignacion Indexada" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
+                              <Button fx:id="asignacion_indexada" layoutX="307.0" layoutY="100.0" mnemonicParsing="false" onAction="#AsignacionIndexadaGUI" prefHeight="25.0" prefWidth="327.0" text="Asignacion Indexada" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Text layoutX="273.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija método de asignación" wrappingWidth="327.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="14.0" />
                               <Button fx:id="crear_archivo" layoutX="66.0" layoutY="149.0" mnemonicParsing="false" onAction="#CrearArchivo" text="Crear Archivo" />
                               <Button fx:id="borrar_disk" layoutX="273.0" layoutY="149.0" mnemonicParsing="false" onAction="#eliminarDisco" text="Borrar Disco" />
@@ -77,7 +84,37 @@
                   </SplitPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="798.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="798.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <ScrollPane fx:id="mapa_disco" prefHeight="200.0" prefWidth="216.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5" layoutX="118.0" layoutY="88.0" orientation="VERTICAL" prefHeight="376.0" prefWidth="395.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <TableView fx:id="tabla_infoDir" prefHeight="184.0" prefWidth="393.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="tabla_archivo" prefWidth="75.0" text="Archivo" />
+                                                <TableColumn fx:id="tabla_inicio" prefWidth="75.0" text="Inicio" />
+                                                <TableColumn fx:id="tabla_tamanio" prefWidth="75.0" text="Tamaño" />
+                                                <TableColumn fx:id="tabla_fin" prefWidth="75.0" text="Fin" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                </items>
+                              </SplitPane>
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>
