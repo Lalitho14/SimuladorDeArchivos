@@ -99,6 +99,7 @@ public class Disco {
       for (int j = i; j < i + Math.ceil((double) a.getTamanio() / tamanio_bloque); j++) {
         Bloque b = new Bloque(true, j);
         b.setArchivo(a);
+        b.setDirAsignada(j);
         n_bloques.set(j, b);
         a.setBloques_asignados(j);
       }
@@ -144,6 +145,7 @@ public class Disco {
         try {
           Bloque b = new Bloque(true, datos.get(i));
           b.setArchivo(a);
+          b.setDirAsignada(datos.get(i));
           n_bloques.set(datos.get(i), b);
           a.setBloques_asignados(datos.get(i));
         } catch (Exception e) {
@@ -171,7 +173,7 @@ public class Disco {
 
   public void verInodos() {
     for (i_nodos i : lista_inodos) {
-      System.out.println(i.getDato() + " " + i.getSig_dato());
+      System.out.println("desde disk " + i.getDato() + " " + i.getSig_dato());
     }
   }
 
@@ -219,6 +221,7 @@ public class Disco {
         try {
           Bloque b = new Bloque(true, datos.get(i));
           b.setArchivo(a);
+          b.setDirAsignada(datos.get(i));
           n_bloques.set(datos.get(i), b);
           a.setBloques_asignados(datos.get(i));
         } catch (Exception e) {
@@ -229,9 +232,9 @@ public class Disco {
 
       for (int j = 1; j < datos.size(); j++) {
         //if (j != a.getInicio()) {
-          i_nodos i_nodo = new i_nodos(a.getInicio(), datos.get(j));
-          a.setLista_inodos(a.getInicio(), datos.get(j));
-          lista_inodos.add(i_nodo);
+        i_nodos i_nodo = new i_nodos(a.getInicio(), datos.get(j));
+        a.setLista_inodos(a.getInicio(), datos.get(j));
+        lista_inodos.add(i_nodo);
         //}
       }
 

@@ -1,27 +1,31 @@
 package Controladores;
 
+import Escenas.TablaFat;
+import Escenas.TablaInodos;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import Implementacion.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.geometry.Pos;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javax.swing.*;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 
 public class ControlMenu {
   private Disco disk;
@@ -84,6 +88,13 @@ public class ControlMenu {
   private AnchorPane disco_pane;
   @FXML
   private ScrollPane mapa_disco;
+  @FXML
+  private Button btn_fat;
+  @FXML
+  private Button btn_inodos;
+  @FXML
+  private Button btn_direcciones;
+
 
   @FXML
   void crearDisk(ActionEvent event) {
@@ -246,6 +257,10 @@ public class ControlMenu {
     tdir.clear();
     datos.clear();
     tabla_infoDir.getItems().clear();
+    btn_fat.setDisable(true);
+    btn_fat.setVisible(false);
+    btn_inodos.setDisable(true);
+    btn_inodos.setVisible(false);
   }
 
   @FXML
@@ -312,6 +327,10 @@ public class ControlMenu {
         tdir.add(tablaDir);
         actualizarTabla();
         datos.clear();
+        btn_fat.setDisable(false);
+        btn_fat.setVisible(true);
+        btn_inodos.setDisable(false);
+        btn_inodos.setVisible(true);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, "Datos no validos. Utilice numeros.", "Error al colocar bloque.", JOptionPane.ERROR_MESSAGE);// Mensaje con Error
@@ -503,6 +522,32 @@ public class ControlMenu {
     tabla_infoDir.refresh();
     for (TablaDir t : tdir) {
       System.out.println(t.getNombre_archivo() + " " + t.getInicio() + " " + t.getTamanio() + " " + t.getFin());
+    }
+  }
+
+  @FXML
+  void verFAT(ActionEvent event) {
+    TablaFat t = new TablaFat(disk);
+    t.generarTabla();
+  }
+
+  @FXML
+  void verInodos(ActionEvent event) {
+    TablaInodos t = new TablaInodos(disk);
+  }
+
+  @FXML
+  void verDirecciones(ActionEvent event) {
+    try {
+      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Escenas/direcciones.fxml")));
+      Stage stage = new Stage();
+      Image icon = new Image("/img/icono.png");
+      stage.getIcons().add(icon);
+      stage.setTitle("Direcciones Logicas a Fisicas");
+      stage.setScene(new Scene(root));
+      stage.show();
+    } catch (Exception e) {
+      System.err.println(e.getMessage());
     }
   }
 }

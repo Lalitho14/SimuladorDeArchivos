@@ -1,42 +1,51 @@
 package Implementacion;
 
 public class Bloque {
-	private boolean estado;
-	private int numero;
-	private Archivo archivo;
+  private boolean estado;
+  private int numero;
+  private Archivo archivo;
 
-	Bloque() {
-		this.estado = false;
-		this.archivo = null;
-	}
+  private int dirAsignada;
 
-	Bloque(boolean estado, int numero) {
-		this.setEstado(estado);
-		this.setNumero(numero);
-	}
+  Bloque() {
+    this.estado = false;
+    this.archivo = null;
+  }
 
-	public boolean isEstado() {
-		return estado;
-	}
+  Bloque(boolean estado, int numero) {
+    this.setEstado(estado);
+    this.setNumero(numero);
+  }
 
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
+  public boolean isEstado() {
+    return estado;
+  }
 
-	public Archivo getArchivo() {
-		return archivo;
-	}
+  public void setEstado(boolean estado) {
+    this.estado = estado;
+  }
 
-	public void setArchivo(Archivo archivo) {
-		this.archivo = archivo;
-	}
+  public Archivo getArchivo() {
+    return archivo;
+  }
 
-	public int getNumero() {
-		return numero;
-	}
+  public void setArchivo(Archivo archivo) {
+    this.archivo = archivo;
+  }
 
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
+  public int getNumero() {
+    return numero;
+  }
 
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
+
+  public void setDirAsignada(int dirAsignada) {
+    this.dirAsignada = dirAsignada;
+  }
+
+  public int getDirAsignada() {
+    return this.dirAsignada;
+  }
 }

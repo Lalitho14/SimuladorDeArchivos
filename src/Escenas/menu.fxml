@@ -108,7 +108,12 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <Button fx:id="btn_fat" disable="true" layoutX="106.0" layoutY="14.0" mnemonicParsing="false" onAction="#verFAT" prefHeight="25.0" prefWidth="183.0" text="FAT" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                          <Button fx:id="btn_inodos" layoutX="106.0" layoutY="57.0" mnemonicParsing="false" onAction="#verInodos" prefHeight="25.0" prefWidth="183.0" text="I-nodos" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="57.0" />
+                                          <Button fx:id="btn_direcciones" layoutX="14.0" layoutY="103.0" mnemonicParsing="false" onAction="#verDirecciones" prefHeight="25.0" prefWidth="176.0" text="Direcciones Logicas a Fisicas" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                                       </children></AnchorPane>
                                 </items>
                               </SplitPane>
                            </children></AnchorPane>
